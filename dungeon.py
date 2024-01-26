@@ -1,4 +1,5 @@
-import time, math
+import time, math, random
+
 
 player_attack = 1
 player_defense = 0
@@ -12,24 +13,35 @@ print('')
 time.sleep(1)
 
 # === [kamer 2] === #
+getal1 = random.randint(10,25)
+getal2 = random.randrange(-5,75)
+oparator = random.choice(["+","-","*"])
+rekensom = f"{getal1} {oparator} {getal2}"
+uitkomst = eval(rekensom)
+
 print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
 print('Het standbeeld heeft een sleutel vast.')
 print('Op zijn borst zit een numpad met de toesten 9 t/m 0.')
-print('Daarboven zie je een som staan 11+15=?')
+print(f'Daarboven zie je een som staan {rekensom}=?')
+print(uitkomst)
 antwoord = int(input('Wat toest je in?'))
 
-if antwoord == 26:
+if antwoord == uitkomst:
     print('Het stadbeeld laat de sleutel vallen en je pakt het op')
+    sleutel = 1
 else:
     print('Er gebeurt niets....')
-
+    sleutel = 0
 print('Je zie een deur achter het standbeeld.')
 print('')
 time.sleep(1)
 
 # === [kamer 3] === #
-item = 'schild'
-player_defense += 1
+item = random.choice(['schild',"zwaard"])
+if item == "shild":
+    player_defense += 1
+else:
+    player_attack +=2
 
 print('Je duwt hem open en stap een hele lange kamer binnen.')
 print(f'In deze kamer staat een tafel met daarop een {item}.')
@@ -56,7 +68,9 @@ else:
 
     if player_attack_amount < zombie_attack_amount:
         print(f'In {player_attack_amount} rondes versla je de zombie.')
-        print(f'Je health is nu {player_health}.')
+        player_hp =  player_health - player_attack_amount * zombie_hit_damage 
+        print(f'Je health is nu {player_hp}.')
+        
     else:
         print('Helaas is de zombie te sterk voor je.')
         print('Game over.')
@@ -68,3 +82,9 @@ time.sleep(1)
 print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
 print('Tot je verbazig zie je een schatkist in het midden van de kamer staan.')
 print('Je loopt er naartoe.')
+if sleutel == 1:
+    print("je opent de schatkist en vind waardevole munten en neemt ze mee")
+    print("Gefeliciteerd je hebt gewonnen")
+else:
+    print('helaas heb je geen sleutel dus je kan de schatkist niet openen')
+    print("Je hebt de schat niet gevonden probreer het opnieuw")
