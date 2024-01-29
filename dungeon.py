@@ -36,21 +36,7 @@ print('Je zie een deur achter het standbeeld.')
 print('')
 time.sleep(1)
 
-# === [kamer 3] === #
-item = random.choice(['schild',"zwaard"])
-if item == "shild":
-    player_defense += 1
-else:
-    player_attack +=2
-
-print('Je duwt hem open en stap een hele lange kamer binnen.')
-print(f'In deze kamer staat een tafel met daarop een {item}.')
-print(f'Je pakt het {item} op en houd het bij je.')
-print('Op naar de volgende deur.')
-print('')
-time.sleep(1)
-
-# === [kamer 4] === #
+# === [kamer 6] === #
 zombie_attack = 1
 zombie_defense = 0
 zombie_health = 2
@@ -74,9 +60,49 @@ else:
     else:
         print('Helaas is de zombie te sterk voor je.')
         print('Game over.')
-        exit()
+        exit()                      
 print('')
 time.sleep(1)
+
+
+
+# === [kamer 3] === #
+item = random.choice(['schild',"zwaard"])
+if item == "shild":
+    player_defense += 1
+else:
+    player_attack +=2
+
+print('Je duwt hem open en stap een hele lange kamer binnen.')
+print(f'In deze kamer staat een tafel met daarop een {item}.')
+print(f'Je pakt het {item} op en houd het bij je.')
+print('Op naar de volgende deur.')
+print('')
+time.sleep(1)
+
+# === [kamer 4] === #
+vijand_attack = 2
+vijand_defense = 0
+vijand_health = 3
+
+vijand_hit_damage = (vijand_attack - player_defense)
+if vijand_hit_damage <= 0:
+    print('Jij hebt een te goede verdedigign voor de zombie, hij kan je geen schade doen.')
+else:
+    vijand_attack_amount = math.ceil(player_health / vijand_hit_damage)
+    
+    player_hit_damage = (player_attack - vijand_defense)
+    player_attack_amount = math.ceil(vijand_health / player_hit_damage)
+
+    if player_attack_amount < vijand_attack_amount:
+        print(f'In {player_attack_amount} rondes versla je de zombie.')
+        player_hp =  player_health - player_attack_amount * vijand_hit_damage 
+        print(f'Je health is nu {player_hp}.')
+        
+    else:
+        print('Helaas is de zombie te sterk voor je.')
+        print('Game over.')
+        exit()
 
 # === [kamer 5] === #
 print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
